@@ -5,6 +5,8 @@ export default defineConfig({
   test: {
     environment: "node",
     include: ["lib/**/*.test.ts"],
+    globals: true,
+    reporters: ["verbose"],
   },
   resolve: {
     alias: { "@": path.resolve(__dirname, ".") },
