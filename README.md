@@ -258,3 +258,6 @@ it solves three hard problems for autonomous agent commerce:
 
 Next.js 15 · TypeScript · TailwindCSS · `@stellar/stellar-sdk` 15 · `@stellar/freighter-api` ·
 Soroban (Rust) · OpenAI-compatible LLM (optional).
+
+<!-- badges -->
+![CI](https://github.com/Rayyanah0/Movexa/actions/workflows/ci.yml/badge.svg)
