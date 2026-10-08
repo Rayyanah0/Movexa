@@ -99,3 +99,13 @@ export function verifyUserPin(username: string, pin: string): boolean {
   if (expected.length !== actual.length) return false;
   return crypto.timingSafeEqual(expected, actual);
 }
+
+/** Remove a user and their PIN hash. Returns true if the user existed. */
+export function deleteUser(username: string): boolean {
+  const normalized = username.trim().toLowerCase() || "demo";
+  const state = readState();
+  if (!state.users[normalized]) return false;
+  delete state.users[normalized];
+  writeState(state);
+  return true;
+}
