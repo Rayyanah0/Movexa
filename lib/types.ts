@@ -11,6 +11,8 @@ export interface Agent {
   /** MVP: marks agents imported from OpenClaw workspace */
   source?: "local" | "openclaw";
   openclawId?: string;
+  /** ISO timestamp of last activity (purchase, run, etc.) */
+  lastActiveAt?: string;
 }
 
 export interface Delegation {
