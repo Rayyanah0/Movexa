@@ -42,6 +42,11 @@ impl AgentRegistry {
         env.storage().instance().set(&DataKey::Marketplace, &marketplace);
     }
 
+    /// Returns the admin address (useful for frontend verification).
+    pub fn get_admin(env: Env) -> Option<Address> {
+        env.storage().instance().get(&DataKey::Admin)
+    }
+
     /// Register a new agent. Requires the owner's wallet authorization (Freighter / smart wallet).
     pub fn register(
         env: Env,
