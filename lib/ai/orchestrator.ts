@@ -58,5 +58,18 @@ function pickDeterministic(goal: string, services: Service[]): Service {
       return { s, score: hits * 100 + s.providerReputation };
     })
     .sort((a, b) => b.score - a.score);
-  return scored[0].s;
+  // Always return a valid service — fall back to highest reputation if no keyword hits
+  const top = scored[0];
+  if (!top) throw new Error("No services to pick from");
+  return top.s;
+}
+
+/**
+ * Filter services by maximum price budget before choosing.
+ * Returns original list if maxPrice is undefined or <= 0.
+ */
+export function filterByBudget(services: Service[], maxPrice?: number): Service[] {
+  if (!maxPrice || maxPrice <= 0) return services;
+  const affordable = services.filter((s) => s.price <= maxPrice);
+  return affordable.length > 0 ? affordable : services;
 }
