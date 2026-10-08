@@ -93,6 +93,7 @@ export async function executePurchase(buyerAgentId: string, serviceId: string): 
 
   // 3. Update local state to mirror chain.
   delegation.spentToday += service.price;
+  buyer.lastActiveAt = new Date().toISOString();
   provider.jobsCompleted += 1;
   provider.successfulPayments += 1;
   provider.reputationScore = Math.min(
