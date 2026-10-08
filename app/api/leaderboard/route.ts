@@ -36,7 +36,8 @@ export async function GET() {
       (a, b) =>
         b.reputationScore - a.reputationScore ||
         b.totalEarned - a.totalEarned ||
-        b.jobsCompleted - a.jobsCompleted,
+        b.jobsCompleted - a.jobsCompleted ||
+        new Date(b.lastActivityAt ?? 0).getTime() - new Date(a.lastActivityAt ?? 0).getTime(),
     );
 
   return NextResponse.json({ providers: ranked });
