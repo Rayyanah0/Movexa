@@ -108,6 +108,22 @@ impl DelegationManager {
             .get(&DataKey::Allowance(agent))
             .ok_or(Error::NoAllowance)
     }
+
+    /// Returns how much of the daily limit the agent has left to spend today.
+    /// Returns 0 if no allowance exists or the window has rolled over.
+    pub fn get_remaining(env: Env, agent: Address) -> i128 {
+        let key = DataKey::Allowance(agent);
+        let a: Allowance = match env.storage().persistent().get(&key) {
+            Some(v) => v,
+            None => return 0,
+        };
+        let now = env.ledger().timestamp();
+        if now >= a.expires_at {
+            return 0;
+        }
+        let spent = if now >= a.day_start + DAY_SECONDS { 0 } else { a.spent_today };
+        (a.daily_limit - spent).max(0)
+    }
 }
 
 mod test;
