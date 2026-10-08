@@ -44,3 +44,6 @@ contracts/target/
 .vscode/*
 !.vscode/extensions.json
 .idea/
+
+# Local agent secrets
+.data/
