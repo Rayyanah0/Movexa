@@ -58,4 +58,14 @@ export function isStellarConfigured(): boolean {
   );
 }
 
+/** Returns a plain object with the current network config (useful for debugging). */
+export function getNetworkConfig() {
+  return {
+    networkPassphrase: NETWORK_PASSPHRASE,
+    sorobanRpcUrl: SOROBAN_RPC_URL,
+    horizonUrl: HORIZON_URL,
+    contracts: CONTRACT_IDS,
+  };
+}
+
 export { TransactionBuilder, BASE_FEE };
